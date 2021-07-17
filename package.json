@@ -1,0 +1,23 @@
+{
+  "name": "pknote-docs-site",
+  "version": "1.0.0",
+  "description": "pknote project docs site by VuePress",
+  "main": "index.js",
+  "repository": "https://github.com/toimc-team/pknote-docs-site.git",
+  "author": "brian <brian@toimc.com>",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "prepare": "rimraf src/.vuepress/dist",
+    "dev": "vuepress dev src",
+    "build": "vuepress build src"
+  },
+  "devDependencies": {
+    "@vuepress/plugin-back-to-top": "^1.8.2",
+    "@vuepress/plugin-medium-zoom": "^1.8.2",
+    "@vuepress/plugin-nprogress": "^1.8.2",
+    "rimraf": "^3.0.2",
+    "vuepress": "^1.8.2",
+    "vuepress-plugin-smooth-scroll": "^0.0.10"
+  }
+}
