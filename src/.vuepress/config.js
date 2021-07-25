@@ -1,19 +1,23 @@
-const { resolve, genSidebarConfig } = require('./utils/index')
-const { description } = require('../../package')
+const { resolve, genSidebarConfig } = require('./utils/index');
+const { description } = require('../../package');
 
 const siderBarOptions = {
   hasSub: true,
-  exclude: ['README.md', 'assets', '.DS_Store', 'docs', 'images']
-}
+  exclude: ['README.md', 'assets', '.DS_Store', 'docs', 'images'],
+};
 
 const nav = [
   {
     text: '首页',
-    link: '/'
+    link: '/',
   },
   {
     text: '项目文档',
-    link: '/docs/'
+    link: '/docs/',
+  },
+  {
+    text: '风格指南',
+    link: '/code-rules/rules/',
   },
   {
     text: '关于',
@@ -23,62 +27,69 @@ const nav = [
         items: [
           {
             text: '更新日志',
-            link: '/update-logs/'
+            link: '/update-logs/',
           },
           {
             text: 'github源码',
-            link: 'https://github.com/toimc-team/pknote-docs-site.git'
+            link: 'https://github.com/toimc-team/pknote-docs-site.git',
           },
-        ]
+        ],
       },
       {
         text: '参与贡献',
         items: [
           {
             text: '贡献指南',
-            link: '/join/guide/'
+            link: '/join/guide/',
           },
           {
             text: '项目说明',
-            link: '/join/desc/'
-          }
-        ]
-      }
-    ]
-  }
-]
+            link: '/join/desc/',
+          },
+        ],
+      },
+    ],
+  },
+];
 
 const sidebar = {
   '/docs/': [
     {
       title: 'CLI工具',
       collapsable: false,
-      children: genSidebarConfig('docs/cli', siderBarOptions)
+      children: genSidebarConfig('docs/cli', siderBarOptions),
     },
     {
       title: 'vue3管理后台',
       collapsable: false,
-      children: genSidebarConfig('docs/admin', siderBarOptions)
+      children: genSidebarConfig('docs/admin', siderBarOptions),
     },
     {
       title: 'nestjs接口平台',
       collapsable: false,
-      children: genSidebarConfig('docs/api', siderBarOptions)
+      children: genSidebarConfig('docs/api', siderBarOptions),
     },
     {
       title: 'vue3前端',
       collapsable: false,
-      children: genSidebarConfig('docs/front', siderBarOptions)
+      children: genSidebarConfig('docs/front', siderBarOptions),
     },
     {
       title: 'flutter跨端移动App',
       collapsable: false,
-      children: genSidebarConfig('docs/miniapp', siderBarOptions)
+      children: genSidebarConfig('docs/miniapp', siderBarOptions),
     },
     {
       title: 'Electron跨端桌面端',
       collapsable: false,
-      children: genSidebarConfig('docs/electron', siderBarOptions)
+      children: genSidebarConfig('docs/electron', siderBarOptions),
+    },
+  ],
+  '/code-rules/': [
+    {
+      title: '风格指南',
+      collapsable: false,
+      children: genSidebarConfig('code-rules/rules', siderBarOptions),
     },
   ],
   // '/about/': [
@@ -92,20 +103,23 @@ const sidebar = {
     {
       title: '首页',
       collapsable: false,
-      children: ['']
-    }
-  ]
-}
+      children: [''],
+    },
+  ],
+};
 
-const isDev = process.env.NODE_ENV === 'development'
+const isDev = process.env.NODE_ENV === 'development';
 
 module.exports = {
+  devServer: {
+    hot: true,
+  },
   configureWebpack: {
     resolve: {
       alias: {
-        '@static': resolve('./static')
-      }
-    }
+        '@static': resolve('./static'),
+      },
+    },
   },
   base: isDev ? '/' : '/notes-page/',
   /**
@@ -116,7 +130,9 @@ module.exports = {
    * Ref：https://v1.vuepress.vuejs.org/config/#description
    */
   description: description,
-
+  markdown: {
+    lineNumbers: true, // 显示代码行号
+  },
   /**
    * Extra tags to be injected to the page HTML `<head>`
    *
@@ -127,8 +143,8 @@ module.exports = {
     ['meta', { name: 'apple-mobile-web-app-capable', content: 'yes' }],
     [
       'meta',
-      { name: 'apple-mobile-web-app-status-bar-style', content: 'black' }
-    ]
+      { name: 'apple-mobile-web-app-status-bar-style', content: 'black' },
+    ],
   ],
 
   /**
@@ -143,7 +159,8 @@ module.exports = {
     editLinkText: '',
     lastUpdated: false,
     nav: nav,
-    sidebar: sidebar
+    sidebar: sidebar,
+    sidebarDepth: 2, // 侧边栏显示2级
   },
 
   /**
@@ -155,8 +172,8 @@ module.exports = {
     '@vuepress/nprogress',
     'vuepress-plugin-smooth-scroll',
     // '@snowdog/vuepress-plugin-pdf-export'
-  ]
+  ],
 
   // wsUrl: isDev ? 'localhost' : 'mp.toimc.com',
   // wsPort: isDev ? 3001 : 443,
-}
+};
